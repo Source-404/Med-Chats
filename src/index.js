@@ -10,7 +10,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 app.use(express.json())
 
-const port = process.env.PORT;
+const PORT = process.env.PORT;
 const publicDirectoryPath = path.join(__dirname, "../public");
 
 //middleware
@@ -55,6 +55,6 @@ io.on("connection", (socket) => {
 });
 
 //start the server
-server.listen(3000, () => {
-  console.log(`server is up on port 3000`);
+server.listen(PORT, () => {
+  console.log(`server is up on port ${PORT}`);
 });
