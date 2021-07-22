@@ -1,4 +1,3 @@
-//acquire the libraries
 const path = require("path");
 const http = require("http");
 const express = require("express");
@@ -9,8 +8,9 @@ const socketio = require("socket.io");
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+app.use(express.json())
 
-const port = process.env.PORT;
+const PORT = process.env.PORT;
 const publicDirectoryPath = path.join(__dirname, "../public");
 
 //middleware
@@ -23,6 +23,18 @@ app.use(express.static(publicDirectoryPath));
 app.get("/demo", (req, res) => {
   res.render("demo");
 });
+
+//Login and register
+
+app.get('/auth/register', (req, res)=> {
+  res.render("register");
+})
+
+app.get('/auth/login', (req, res)=> {
+  res.render("login");
+})
+
+
 
 // Server logic from here
 let count = 0;
@@ -43,6 +55,6 @@ io.on("connection", (socket) => {
 });
 
 //start the server
-server.listen(port, () => {
-  console.log(`server is up on port ${port}`);
+server.listen(PORT, () => {
+  console.log(`server is up on port ${PORT}`);
 });
