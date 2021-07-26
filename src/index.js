@@ -3,12 +3,14 @@ const http = require("http");
 const express = require("express");
 const ejsMate = require("ejs-mate");
 const socketio = require("socket.io");
+const router = require("./routes/jwtAuth");
 
 //create the server
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
-app.use(express.json())
+app.use(express.json());
+app.use(router);
 
 const PORT = process.env.PORT;
 const publicDirectoryPath = path.join(__dirname, "../public");
@@ -26,15 +28,13 @@ app.get("/demo", (req, res) => {
 
 //Login and register
 
-app.get('/auth/register', (req, res)=> {
+app.get("/auth/register", (req, res) => {
   res.render("register");
-})
+});
 
-app.get('/auth/login', (req, res)=> {
+app.get("/auth/login", (req, res) => {
   res.render("login");
-})
-
-
+});
 
 // Server logic from here
 let count = 0;
