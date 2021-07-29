@@ -1,11 +1,15 @@
 <% layout("layout/boilerplate")%>
 <h1>Hello people of this world</h1>
 <button id="increment">+1</button>
-<form id="message-form">
-    <input placeholder="Message..." type="text" />
-    
+<form id="message-form" method="POST">
+    <input placeholder="Name..." name="name" /><br>
+    <input placeholder="Message..." type="text" name="message" />
     <button>Send</button>
 </form>
+
+<div class="messages">
+    <div class="msg"><span class="username">rajat</span> <span class="chat">This is Us nne Direction</span></div>
+</div>
 
 
 
