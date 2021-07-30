@@ -37,20 +37,12 @@ app.get("/auth/login", (req, res) => {
 });
 
 // Server logic from here
-let count = 0;
 io.on("connection", (socket) => {
   console.log("New WebSocket connection");
 
-  // socket.emit("countUpdated");
-
-  socket.on("increment", () => {
-    count++;
-    // socket.emit("countUpdated", count);
-    io.emit("countUpdated", count);
-  });
-
-  socket.on("sendMessage", (msg) => {
-    socket.broadcast.emit("message", `A user sent: ${msg}`);
+  //receive username and messages from client
+  socket.on("messages", (msg) => {
+    io.emit("response", msg);
   });
 });
 

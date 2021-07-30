@@ -12,6 +12,20 @@ body {
 .container {
   min-height: 90vh;
 }
+.messages {
+  margin-top: 1rem;
+}
+.msg {
+  background: rgb(194, 193, 193);
+  margin-top: 0.5rem;
+}
+.username {
+  text-transform: capitalize;
+  color: #007abb;
+}
+.chat {
+  color: #d60000;
+}
 
 nav,
 footer {
