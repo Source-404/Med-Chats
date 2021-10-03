@@ -1,9 +1,8 @@
-const path = require("path");
 const http = require("http");
+require("./db/mongoose");
 const express = require("express");
-const ejsMate = require("ejs-mate");
 const socketio = require("socket.io");
-const router = require("./routes/jwtAuth");
+const router = require("./routes/user");
 
 //create the server
 const app = express();
@@ -13,27 +12,11 @@ app.use(express.json());
 app.use(router);
 
 const PORT = process.env.PORT;
-const publicDirectoryPath = path.join(__dirname, "../public");
-
-//middleware
-app.engine("ejs", ejsMate);
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "../views"));
-app.use(express.static(publicDirectoryPath));
 
 //rounting
-app.get("/demo", (req, res) => {
-  res.render("demo");
-});
 
-//Login and register
-
-app.get("/auth/register", (req, res) => {
-  res.render("register");
-});
-
-app.get("/auth/login", (req, res) => {
-  res.render("login");
+app.get("", (req, res) => {
+  return res.send("Welcome to MedChats");
 });
 
 // Server logic from here
