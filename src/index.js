@@ -1,37 +1,35 @@
-const path = require("path");
 const http = require("http");
+require("./db/mongoose");
 const express = require("express");
 const socketio = require("socket.io");
+const router = require("./routes/user");
 
+//create the server
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+app.use(express.json());
+app.use(router);
 
-const port = process.env.PORT;
-const publicDirectoryPath = path.join(__dirname, "../public");
+const PORT = process.env.PORT;
 
-app.use(express.static(publicDirectoryPath));
+//rounting
+
+app.get("", (req, res) => {
+  return res.send("Welcome to MedChats");
+});
 
 // Server logic from here
-
-let count = 0;
-
 io.on("connection", (socket) => {
   console.log("New WebSocket connection");
 
-  socket.emit("countUpdated");
-
-  socket.on("increment", () => {
-    count++;
-    // socket.emit("countUpdated", count);
-    io.emit("countUpdated", count);
-  });
-
-  socket.on("sendMessage", (msg) => {
-    socket.broadcast.emit("message", `A user sent: ${msg}`);
+  //receive username and messages from client
+  socket.on("messages", (msg) => {
+    io.emit("response", msg);
   });
 });
 
-server.listen(port, () => {
-  console.log(`server is up on port ${port}`);
+//start the server
+server.listen(PORT, () => {
+  console.log(`server is up on port ${PORT}`);
 });

@@ -1,3 +1,37 @@
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background: #c27a06;
+  background: #f1f5f8;
+}
+.container {
+  min-height: 90vh;
+}
+.messages {
+  margin-top: 1rem;
+}
+.msg {
+  background: rgb(194, 193, 193);
+  margin-top: 0.5rem;
+}
+.username {
+  text-transform: capitalize;
+  color: #007abb;
+}
+.chat {
+  color: #d60000;
+}
+
+nav,
+footer {
+  text-align: center;
+  text-transform: uppercase;
+  background: black;
+  color: white;
+  padding: 20px;
 }
